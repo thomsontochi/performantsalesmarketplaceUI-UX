@@ -4,7 +4,7 @@ A performant, production-quality sales page redesign for [PromptEdit.com](https:
 
 ## Live Demo
 
-[View live on Netlify →](https://your-netlify-url.netlify.app)
+[View live on Netlify →](https://performantsalesmarketplaceui-ux.netlify.app)
 
 ## Brief
 
