@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="keywords" content="video editing, AI tools, templates, marketplace, Tailwind CSS, Laravel, Vue, TypeScript, Inertia, React, PostgreSQL, AWS, Austin Opia, Senior Laravel Developer, Design-Focused Front-End Engineer" />
+<title>Reelyard — The marketplace where video creators ship faster</title>
+<meta name="description" content="A marketplace, AI toolkit, and editor extensions built for video creators. Join 80,000+ editors using Reelyard. Designed by Austin Opia - Senior Laravel Developer & Design-Focused Front-End Engineer." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3f0ea;
+    --bg-2:#ece8df;
+    --ink:#13130f;
+    --ink-2:#3a382f;
+    --muted:#7a7567;
+    --line:#d8d2c4;
+    --accent:#c8ff3d;      /* electric lime */
+    --accent-ink:#0f1a00;
+    --warm:#ff6a3d;        /* used very sparingly */
+  }
+  html,body{background:var(--bg);color:var(--ink);overflow-x:hidden;}
+  *,*::before,*::after{box-sizing:border-box;}
+  body{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-feature-settings:"ss01","cv11";text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;}
+  .serif{font-family:'Instrument Serif',ui-serif,Georgia,serif;font-weight:400;letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;}
+  .ink{color:var(--ink);}
+  .ink2{color:var(--ink-2);}
+  .muted{color:var(--muted);}
+  .line{border-color:var(--line);}
+  .bg-bg{background:var(--bg);}
+  .bg-bg2{background:var(--bg-2);}
+  .bg-ink{background:var(--ink);}
+  .text-bg{color:var(--bg);}
+  .accent{background:var(--accent);color:var(--accent-ink);}
+  .accent-text{color:var(--accent);}
+  .ring-line{box-shadow:inset 0 0 0 1px var(--line);}
+  /* Display type */
+  .display{font-family:'Instrument Serif',serif;font-weight:400;line-height:0.92;letter-spacing:-0.02em;}
+  .display em{font-style:italic;color:var(--ink-2);}
+  .display{overflow-wrap:break-word;}
+  h1,h2,h3{text-wrap:balance;}
+  p{text-wrap:pretty;}
+  /* Hairline rule */
+  .hr{height:1px;background:var(--line);}
+  /* Marquee */
+  @keyframes scroll-x { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .marquee-track{animation:scroll-x 40s linear infinite;}
+  /* Card hover */
+  .tool-card{transition:transform .25s ease, background .25s ease;}
+  .tool-card:hover{transform:translateY(-2px);background:#ffffff;}
+  /* Striped placeholder */
+  .stripe{
+    background-image:
+      linear-gradient(135deg, rgba(19,19,15,0.06) 0 2px, transparent 2px 14px);
+    background-color:#e6e1d3;
+  }
+  .stripe-dark{
+    background-image:
+      linear-gradient(135deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);
+    background-color:#1c1c17;
+  }
+  /* Tab pill */
+  .pill{border:1px solid var(--line);background:rgba(255,255,255,0.5);}
+  /* Sticky nav scroll progress */
+  .ticker-dot{width:6px;height:6px;border-radius:9999px;background:var(--accent);box-shadow:0 0 0 4px rgba(200,255,61,0.25);}
+  /* Subtle entry */
+  @keyframes rise { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+  .rise{animation:rise .7s ease-out both;}
+  /* Selection */
+  ::selection{background:var(--accent);color:var(--accent-ink);}
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:.55rem;padding:.85rem 1.1rem;border-radius:9999px;font-weight:600;font-size:.92rem;letter-spacing:-0.005em;transition:transform .15s ease, background .2s ease, color .2s ease;}
+  .btn-primary{background:var(--ink);color:var(--bg);}
+  .btn-primary:hover{background:#000;}
+  .btn-accent{background:var(--accent);color:var(--accent-ink);}
+  .btn-accent:hover{transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line);}
+  .btn-ghost:hover{background:rgba(255,255,255,0.6);}
+  /* Tag */
+  .tag{display:inline-flex;align-items:center;gap:.4rem;padding:.32rem .6rem;border-radius:9999px;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;}
+  /* Big number */
+  .big-num{font-family:'Instrument Serif',serif;font-weight:400;line-height:0.9;letter-spacing:-0.03em;}
+  /* Asymmetric card */
+  .editor-shell{background:#13130f;border-radius:18px;overflow:hidden;}
+  .editor-chrome{display:flex;align-items:center;gap:.4rem;padding:.7rem .9rem;border-bottom:1px solid #26261f;}
+  .editor-dot{width:10px;height:10px;border-radius:9999px;background:#3a382f;}
+  /* Diagonal lime tape */
+  .tape{background:var(--accent);color:var(--accent-ink);transform:rotate(-2deg);display:inline-block;padding:.15rem .55rem;}
+  /* (reveal-on-scroll removed — was hiding sections if observer misfired) */
+  /* Pricing emphasis */
+  .price-card.featured{background:var(--ink);color:var(--bg);}
+  .price-card.featured .muted{color:#9c978a;}
+  .price-card.featured .line{border-color:#2a2a22;}
+  /* Avatar */
+  .avatar{width:44px;height:44px;border-radius:9999px;background:#cdc6b5;display:inline-flex;align-items:center;justify-content:center;font-weight:600;color:#3a382f;}
+  /* Underline link */
+  .ulink{position:relative;}
+  .ulink::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:currentColor;opacity:.4;}
+  .ulink:hover::after{opacity:1;}
+  /* Floating dock */
+  .dock{backdrop-filter:saturate(140%) blur(8px);background:rgba(243,240,234,0.78);}
+  /* Asymmetric "frame" boxes for the AI tools */
+  .frame{position:relative;border:1px solid var(--line);background:#fbf9f4;border-radius:14px;padding:1.1rem;}
+  .frame .corner{position:absolute;width:8px;height:8px;background:var(--ink);}
+  .frame .corner.tl{top:-4px;left:-4px}
+  .frame .corner.tr{top:-4px;right:-4px}
+  .frame .corner.bl{bottom:-4px;left:-4px}
+  .frame .corner.br{bottom:-4px;right:-4px}
+  /* Section label */
+  .seclabel{display:flex;align-items:center;gap:.6rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+  .seclabel .dot{width:6px;height:6px;background:var(--ink);border-radius:9999px;}
+  /* Responsive display sizes via clamp — capped lower on mobile so big type breathes */
+  .t-display{font-size:clamp(48px, 9vw, 152px);line-height:0.95;}
+  .t-h2{font-size:clamp(34px, 5.6vw, 84px);line-height:1.02;}
+  .t-h3{font-size:clamp(26px, 3.4vw, 52px);line-height:1.05;}
+  @media (max-width: 640px){
+    .t-display{line-height:1.0;}
+    .t-h2{line-height:1.05;}
+  }
+  /* Hide scrollbar on horizontal scroll */
+  .noscrollbar::-webkit-scrollbar{display:none}
+  .noscrollbar{scrollbar-width:none}
+  /* Footnote */
+  .foot{font-size:.78rem;color:var(--muted);}
+  /* Subtle grain */
+  .grain::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;mix-blend-mode:multiply;
+    background-image:radial-gradient(rgba(19,19,15,.05) 1px, transparent 1px);
+    background-size:3px 3px;
+  }
+</style>
+<!-- Designed by Austin Opia -->
+</head>
+<body class="bg-bg ink">
+
+<!-- ============== TOP BAR ============== -->
+<header class="sticky top-0 z-40 dock border-b line">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 h-14 md:h-16 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2">
+      <span class="inline-block w-6 h-6 bg-ink relative">
+        <span class="absolute right-0 top-0 w-3 t-h3 accent"></span>
+      </span>
+      <span class="font-semibold tracking-tight text-[15px]">Reelyard</span>
+      <span class="mono muted text-[11px] hidden md:inline">/ for video creators</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-7 text-sm ink2">
+      <a href="#marketplace" class="hover:ink">Marketplace</a>
+      <a href="#ai" class="hover:ink">AI tools</a>
+      <a href="#extensions" class="hover:ink">Extensions</a>
+      <a href="#pricing" class="hover:ink">Pricing</a>
+      <a href="#creators" class="hover:ink">Creators</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <a href="#" class="hidden md:inline text-sm ink2 hover:ink px-2">Sign in</a>
+      <a href="#join" class="btn btn-primary text-sm">Start free
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="relative overflow-hidden">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 pt-10 md:pt-16 pb-10 md:pb-20">
+    <div class="flex items-center gap-3 mb-7">
+      <span class="ticker-dot"></span>
+      <span class="mono text-[12px] muted">LIVE — 1,284 creators editing on Reelyard right now</span>
+    </div>
+
+    <h1 class="display t-display mb-6 max-w-[15ch] rise">
+      Ship the&nbsp;cut <em>before</em> the&nbsp;vibe&nbsp;dies.
+    </h1>
+
+    <div class="grid md:grid-cols-12 gap-6 md:gap-10 items-end">
+      <p class="md:col-span-6 text-[17px] md:text-[19px] leading-[1.45] ink2 max-w-[52ch]">
+        Reelyard is the marketplace, AI toolkit, and editor extensions video creators
+        actually open every day. 30,000+ templates, the best generative models in one
+        timeline, and a render that doesn’t make you wait for coffee.
+      </p>
+      <div class="md:col-span-6 flex flex-wrap items-center gap-3 md:justify-end">
+        <a href="#join" class="btn btn-accent">
+          Start free — no card
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#tour" class="btn btn-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg>
+          Watch the 90-sec tour
+        </a>
+      </div>
+    </div>
+
+    <!-- HERO ARTBOARD: faux editor + template grid -->
+    <div id="tour" class="mt-12 md:mt-20 grid grid-cols-12 gap-4 md:gap-6">
+      <!-- Editor mock -->
+      <div class="col-span-12 lg:col-span-8 editor-shell relative">
+        <div class="editor-chrome">
+          <span class="editor-dot"></span><span class="editor-dot"></span><span class="editor-dot"></span>
+          <span class="mono text-[11px] text-[#a8a294] ml-2">reelyard / studio · launch-promo-v3.rel</span>
+          <span class="ml-auto flex items-center gap-2">
+            <span class="mono text-[11px] text-[#a8a294]">⌘K</span>
+            <span class="px-2 py-[3px] mono text-[10px] rounded-full" style="background:#26261f;color:#c8ff3d;">RENDER · 00:48</span>
+          </span>
+        </div>
+        <div class="grid grid-cols-12 min-h-[360px] md:min-h-[460px]">
+          <!-- Left rail -->
+          <aside class="col-span-3 lg:col-span-2 border-r" style="border-color:#26261f">
+            <div class="p-3 space-y-1.5">
+              <div class="mono text-[10px] text-[#a8a294] px-1 mb-1">LIBRARY</div>
+              <div class="flex items-center gap-2 px-2 py-1.5 rounded-md" style="background:#1c1c17;color:#f3f0ea;">
+                <span class="w-1.5 h-1.5 rounded-full accent"></span>
+                <span class="text-[12px]">My projects</span>
+              </div>
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[#a8a294] text-[12px]">Templates · 30,412</div>
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[#a8a294] text-[12px]">Stock · 4.2M</div>
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[#a8a294] text-[12px]">SFX & Music</div>
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[#a8a294] text-[12px]">LUTs · 2,100</div>
+              <div class="mono text-[10px] text-[#a8a294] px-1 mt-4 mb-1">AI</div>
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[#a8a294] text-[12px]">Veo · Generate</div>
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[#a8a294] text-[12px]">Kling · Motion</div>
+              <div class="flex items-center gap-2 px-2 py-1.5 text-[#a8a294] text-[12px]">Nano Banana</div>
+            </div>
+          </aside>
+          <!-- Canvas -->
+          <div class="col-span-9 lg:col-span-7 relative border-r" style="border-color:#26261f">
+            <div class="absolute inset-0 p-5 flex flex-col">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="mono text-[10px] text-[#a8a294]">CANVAS · 1920×1080 · 24fps</span>
+                <span class="ml-auto mono text-[10px] text-[#a8a294]">SAFE · 90%</span>
+              </div>
+              <div class="flex-1 rounded-md stripe-dark grid place-items-center relative overflow-hidden">
+                <div class="absolute top-3 left-3 mono text-[10px] text-[#a8a294]">[ shot 04 · generated by Veo · 6s ]</div>
+                <div class="text-center px-6">
+                  <div class="serif text-[#f3f0ea] text-[44px] md:text-[64px] leading-none">Make it&nbsp;<em>move.</em></div>
+                  <div class="mono text-[11px] mt-3 text-[#a8a294]">drag clip · ⌥ for trim · ⌘ to lock</div>
+                </div>
+                <div class="absolute bottom-3 right-3 flex gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full" style="background:#ff6a3d"></span>
+                  <span class="w-1.5 h-1.5 rounded-full accent"></span>
+                  <span class="w-1.5 h-1.5 rounded-full" style="background:#3a382f"></span>
+                </div>
+              </div>
+              <!-- Timeline -->
+              <div class="mt-3">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="mono text-[10px] text-[#a8a294]">TIMELINE</span>
+                  <span class="mono text-[10px] text-[#a8a294]">·</span>
+                  <span class="mono text-[10px] text-[#a8a294]">00:00 — 00:14:22</span>
+                  <span class="ml-auto mono text-[10px] accent-text">▮ 00:06:11</span>
+                </div>
+                <div class="space-y-1.5">
+                  <div class="h-5 rounded-sm relative overflow-hidden" style="background:#1c1c17">
+                    <div class="absolute inset-y-0 left-0 w-[18%] accent"></div>
+                    <div class="absolute inset-y-0 left-[20%] w-[24%]" style="background:#ff6a3d"></div>
+                    <div class="absolute inset-y-0 left-[46%] w-[34%]" style="background:#2a2a22"></div>
+                    <div class="absolute inset-y-0 left-[82%] w-[14%]" style="background:#3a382f"></div>
+                  </div>
+                  <div class="h-5 rounded-sm relative overflow-hidden" style="background:#1c1c17">
+                    <div class="absolute inset-y-0 left-[6%] w-[22%]" style="background:#3a382f"></div>
+                    <div class="absolute inset-y-0 left-[34%] w-[12%]" style="background:#2a2a22"></div>
+                    <div class="absolute inset-y-0 left-[50%] w-[44%]" style="background:#3a382f"></div>
+                  </div>
+                  <div class="h-5 rounded-sm relative overflow-hidden" style="background:#1c1c17">
+                    <div class="absolute inset-y-0 left-[12%] w-[64%]" style="background:#2a2a22"></div>
+                    <div class="absolute inset-y-0 left-[80%] w-[10%] accent"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Right rail / AI prompt -->
+          <aside class="col-span-12 lg:col-span-3 p-4">
+            <div class="mono text-[10px] text-[#a8a294] mb-2">AI · PROMPT</div>
+            <div class="rounded-md p-3" style="background:#1c1c17;">
+              <div class="text-[#f3f0ea] text-[13px] leading-snug">
+                Slow push-in on a vintage hi-fi, dust in golden hour light, 35mm grain, 6&nbsp;seconds.
+              </div>
+              <div class="mt-3 flex items-center gap-1.5 flex-wrap">
+                <span class="mono text-[10px] px-1.5 py-0.5 rounded" style="background:#2a2a22;color:#c8ff3d;">Veo 3</span>
+                <span class="mono text-[10px] px-1.5 py-0.5 rounded" style="background:#2a2a22;color:#a8a294;">9:16</span>
+                <span class="mono text-[10px] px-1.5 py-0.5 rounded" style="background:#2a2a22;color:#a8a294;">seed 4421</span>
+              </div>
+              <button class="mt-3 w-full text-center py-2 rounded-md mono text-[11px]" style="background:#c8ff3d;color:#0f1a00;">Generate · 12 credits</button>
+            </div>
+            <div class="mt-4 mono text-[10px] text-[#a8a294]">RECENT</div>
+            <div class="grid grid-cols-3 gap-1.5 mt-2">
+              <div class="aspect-square rounded-sm stripe-dark"></div>
+              <div class="aspect-square rounded-sm stripe-dark"></div>
+              <div class="aspect-square rounded-sm stripe-dark"></div>
+              <div class="aspect-square rounded-sm stripe-dark"></div>
+              <div class="aspect-square rounded-sm stripe-dark"></div>
+              <div class="aspect-square rounded-sm" style="background:#c8ff3d22;border:1px dashed #c8ff3d;"></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Side stack -->
+      <div class="col-span-12 lg:col-span-4 flex flex-col gap-4 md:gap-6">
+        <div class="frame">
+          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+          <div class="seclabel mb-3"><span class="dot"></span> What you get</div>
+          <ul class="space-y-2.5 text-[15px] ink2">
+            <li class="flex gap-2"><span class="mono muted text-xs mt-1">01</span> 30,412 editable Premiere &amp; Resolve templates</li>
+            <li class="flex gap-2"><span class="mono muted text-xs mt-1">02</span> Veo, Kling, Nano Banana — one prompt bar</li>
+            <li class="flex gap-2"><span class="mono muted text-xs mt-1">03</span> 4.2M stock clips, every one royalty-clean</li>
+            <li class="flex gap-2"><span class="mono muted text-xs mt-1">04</span> Cloud render that finishes before your client replies</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl p-5 bg-ink text-bg relative overflow-hidden">
+          <div class="mono text-[10px]" style="color:#9c978a">QUICK MATH</div>
+          <div class="big-num text-[64px] md:text-[80px] mt-2">$0.08</div>
+          <div class="text-[15px]" style="color:#cfc9b8">avg cost per generated second on the Studio plan — most marketplaces are 4–7× that.</div>
+          <span class="absolute -bottom-6 -right-4 tape mono text-[11px] font-semibold">VS $0.34 elsewhere</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== LOGO MARQUEE ============== -->
+<section class="border-y line bg-bg2">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-5 flex items-center gap-6 overflow-hidden">
+    <div class="mono text-[11px] muted shrink-0 hidden md:block">USED INSIDE TEAMS AT&nbsp;&nbsp;→</div>
+    <div class="overflow-hidden flex-1">
+      <div class="marquee-track flex gap-12 whitespace-nowrap items-center serif text-[28px] md:text-[34px] ink2">
+        <span>Wondercraft</span><span class="muted">·</span>
+        <span>North Studios</span><span class="muted">·</span>
+        <span>Mira &amp; Sons</span><span class="muted">·</span>
+        <span>Tapehouse</span><span class="muted">·</span>
+        <span>Backseat Films</span><span class="muted">·</span>
+        <span>Hollow Branch</span><span class="muted">·</span>
+        <span>Pinecone Post</span><span class="muted">·</span>
+        <!-- duplicate for loop -->
+        <span>Wondercraft</span><span class="muted">·</span>
+        <span>North Studios</span><span class="muted">·</span>
+        <span>Mira &amp; Sons</span><span class="muted">·</span>
+        <span>Tapehouse</span><span class="muted">·</span>
+        <span>Backseat Films</span><span class="muted">·</span>
+        <span>Hollow Branch</span><span class="muted">·</span>
+        <span>Pinecone Post</span><span class="muted">·</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== AI TOOLS ============== -->
+<section id="ai" class="relative">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-10 md:mb-14">
+      <div class="md:col-span-7">
+        <div class="seclabel mb-5"><span class="dot"></span> 01 — One prompt bar, every model</div>
+        <h2 class="display t-h2 max-w-[18ch]">Veo, Kling, Nano Banana — <em>same&nbsp;timeline.</em></h2>
+      </div>
+      <p class="md:col-span-5 ink2 text-[17px] leading-[1.5]">
+        Stop bouncing between six tabs and seven dashboards. Reelyard wires the best generative
+        models straight into your editor — generate a shot, drop it on the timeline, keep cutting.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+      <!-- Card -->
+      <article class="tool-card rounded-2xl p-5 ring-line bg-bg2">
+        <div class="flex items-center justify-between mb-10">
+          <span class="tag" style="background:#13130f;color:#c8ff3d;">Video · Veo 3</span>
+          <span class="mono text-[11px] muted">v3.1</span>
+        </div>
+        <div class="serif text-[34px] leading-none mb-1">Generate</div>
+        <div class="ink2 text-[14px] mb-4">Up to 12s, 1080p, audio-synced cinematic shots.</div>
+        <div class="hr my-3"></div>
+        <div class="flex items-center justify-between text-[12px] muted">
+          <span class="mono">12 credits / 6s</span>
+          <span>→</span>
+        </div>
+      </article>
+      <article class="tool-card rounded-2xl p-5 ring-line bg-bg2">
+        <div class="flex items-center justify-between mb-10">
+          <span class="tag" style="background:#13130f;color:#c8ff3d;">Motion · Kling</span>
+          <span class="mono text-[11px] muted">v2.0</span>
+        </div>
+        <div class="serif text-[34px] leading-none mb-1">Animate</div>
+        <div class="ink2 text-[14px] mb-4">Turn any still frame into a 5s motion clip with control points.</div>
+        <div class="hr my-3"></div>
+        <div class="flex items-center justify-between text-[12px] muted">
+          <span class="mono">7 credits / 5s</span>
+          <span>→</span>
+        </div>
+      </article>
+      <article class="tool-card rounded-2xl p-5 ring-line bg-bg2">
+        <div class="flex items-center justify-between mb-10">
+          <span class="tag" style="background:#13130f;color:#c8ff3d;">Image · Nano Banana</span>
+          <span class="mono text-[11px] muted">v1.4</span>
+        </div>
+        <div class="serif text-[34px] leading-none mb-1">Composite</div>
+        <div class="ink2 text-[14px] mb-4">Edit, relight, swap subjects with surgical text prompts.</div>
+        <div class="hr my-3"></div>
+        <div class="flex items-center justify-between text-[12px] muted">
+          <span class="mono">2 credits / image</span>
+          <span>→</span>
+        </div>
+      </article>
+      <article class="tool-card rounded-2xl p-5 ring-line bg-bg2">
+        <div class="flex items-center justify-between mb-10">
+          <span class="tag" style="background:#13130f;color:#c8ff3d;">Audio · Voicekit</span>
+          <span class="mono text-[11px] muted">beta</span>
+        </div>
+        <div class="serif text-[34px] leading-none mb-1">Voice</div>
+        <div class="ink2 text-[14px] mb-4">Clone, dub, and clean dialogue — broadcast-loudness baked in.</div>
+        <div class="hr my-3"></div>
+        <div class="flex items-center justify-between text-[12px] muted">
+          <span class="mono">1 credit / minute</span>
+          <span>→</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Workflow strip -->
+    <div class="mt-14 md:mt-20 grid md:grid-cols-12 gap-6 md:gap-10 items-start">
+      <div class="md:col-span-5">
+        <div class="seclabel mb-4"><span class="dot"></span> Inline · zero-friction</div>
+        <h3 class="serif t-h3 max-w-[16ch]">Prompt, drop, cut. <em>That’s the whole loop.</em></h3>
+      </div>
+      <div class="md:col-span-7">
+        <ol class="grid sm:grid-cols-3 gap-3">
+          <li class="rounded-xl p-4 bg-bg2 ring-line">
+            <div class="mono text-[11px] muted">01 · PROMPT</div>
+            <div class="serif text-[28px] leading-none mt-2 mb-1">Describe</div>
+            <div class="text-[13px] ink2">Plain English. No model-juggling. We pick the right engine.</div>
+          </li>
+          <li class="rounded-xl p-4 bg-bg2 ring-line">
+            <div class="mono text-[11px] muted">02 · PICK</div>
+            <div class="serif text-[28px] leading-none mt-2 mb-1">Compare</div>
+            <div class="text-[13px] ink2">See four takes side-by-side, regenerate only the one frame you don’t like.</div>
+          </li>
+          <li class="rounded-xl p-4 bg-ink text-bg">
+            <div class="mono text-[11px]" style="color:#9c978a">03 · CUT</div>
+            <div class="serif text-[28px] leading-none mt-2 mb-1 text-bg">Drop &amp; trim</div>
+            <div class="text-[13px]" style="color:#cfc9b8">Lands on the timeline as a real clip — keyframes, alpha, the lot.</div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== MARKETPLACE ============== -->
+<section id="marketplace" class="border-t line bg-bg2">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-10 md:mb-14">
+      <div class="md:col-span-7">
+        <div class="seclabel mb-5"><span class="dot"></span> 02 — Marketplace</div>
+        <h2 class="display t-h2 max-w-[18ch]">Templates that look <em>nothing</em> like templates.</h2>
+      </div>
+      <p class="md:col-span-5 ink2 text-[17px] leading-[1.5]">
+        30,412 packs from 2,800 working creators. Premiere, Resolve, After Effects, FCP. Every
+        license commercial-clear. Search by vibe, not keyword.
+      </p>
+    </div>
+
+    <!-- Search bar -->
+    <div class="rounded-2xl bg-bg ring-line p-3 flex flex-wrap items-center gap-2">
+      <span class="mono text-[11px] muted px-2">⌘K</span>
+      <span class="text-[15px] ink2">moody analog opener for indie skate doc, 2 mins</span>
+      <span class="ml-auto flex flex-wrap gap-1.5">
+        <span class="pill mono text-[11px] px-2.5 py-1 rounded-full">9:16</span>
+        <span class="pill mono text-[11px] px-2.5 py-1 rounded-full">grain</span>
+        <span class="pill mono text-[11px] px-2.5 py-1 rounded-full">slow burn</span>
+        <span class="pill mono text-[11px] px-2.5 py-1 rounded-full">premiere</span>
+        <span class="pill mono text-[11px] px-2.5 py-1 rounded-full">under $19</span>
+      </span>
+    </div>
+
+    <!-- Result grid -->
+    <div class="mt-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+      <!-- card template -->
+      <a class="block group" href="#">
+        <div class="aspect-[4/5] rounded-xl stripe relative overflow-hidden ring-line">
+          <span class="absolute top-2 left-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130fcc;color:#f3f0ea;">PR · 1080p</span>
+          <span class="absolute bottom-2 right-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#c8ff3d;color:#0f1a00;">04:18</span>
+          <div class="absolute inset-x-3 bottom-10 serif text-[24px] leading-none ink">Tape Hiss / Opener</div>
+        </div>
+        <div class="flex items-center justify-between mt-2 text-[13px]">
+          <span class="ink2">by Nima Okafor</span>
+          <span class="mono muted">$14</span>
+        </div>
+      </a>
+      <a class="block group" href="#">
+        <div class="aspect-[4/5] rounded-xl stripe relative overflow-hidden ring-line" style="background-color:#dfe7d0">
+          <span class="absolute top-2 left-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130fcc;color:#f3f0ea;">RESOLVE · 4K</span>
+          <span class="absolute bottom-2 right-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130f;color:#f3f0ea;">02:02</span>
+          <div class="absolute inset-x-3 bottom-10 serif text-[24px] leading-none ink">Lo-Fi Lower Thirds Vol.2</div>
+        </div>
+        <div class="flex items-center justify-between mt-2 text-[13px]">
+          <span class="ink2">by Studio Carthage</span>
+          <span class="mono muted">Free</span>
+        </div>
+      </a>
+      <a class="block group" href="#">
+        <div class="aspect-[4/5] rounded-xl stripe relative overflow-hidden ring-line" style="background-color:#efd9c6">
+          <span class="absolute top-2 left-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130fcc;color:#f3f0ea;">AE · 24fps</span>
+          <span class="absolute bottom-2 right-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130f;color:#f3f0ea;">00:48</span>
+          <div class="absolute inset-x-3 bottom-10 serif text-[24px] leading-none ink">Skate Doc · Title Pack</div>
+        </div>
+        <div class="flex items-center justify-between mt-2 text-[13px]">
+          <span class="ink2">by Olu &amp; Park</span>
+          <span class="mono muted">$22</span>
+        </div>
+      </a>
+      <a class="block group" href="#">
+        <div class="aspect-[4/5] rounded-xl stripe relative overflow-hidden ring-line" style="background-color:#d8d1ea">
+          <span class="absolute top-2 left-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130fcc;color:#f3f0ea;">PR · 1080p</span>
+          <span class="absolute bottom-2 right-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130f;color:#f3f0ea;">06:12</span>
+          <div class="absolute inset-x-3 bottom-10 serif text-[24px] leading-none ink">Night Drive / Cinematic</div>
+        </div>
+        <div class="flex items-center justify-between mt-2 text-[13px]">
+          <span class="ink2">by Halcyon Cuts</span>
+          <span class="mono muted">$18</span>
+        </div>
+      </a>
+      <a class="block group" href="#">
+        <div class="aspect-[4/5] rounded-xl stripe relative overflow-hidden ring-line" style="background-color:#cfe0e6">
+          <span class="absolute top-2 left-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130fcc;color:#f3f0ea;">FCP · 4K</span>
+          <span class="absolute bottom-2 right-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#c8ff3d;color:#0f1a00;">03:50</span>
+          <div class="absolute inset-x-3 bottom-10 serif text-[24px] leading-none ink">Pool House / Vlog Kit</div>
+        </div>
+        <div class="flex items-center justify-between mt-2 text-[13px]">
+          <span class="ink2">by Mira Soto</span>
+          <span class="mono muted">$11</span>
+        </div>
+      </a>
+      <a class="block group" href="#">
+        <div class="aspect-[4/5] rounded-xl stripe relative overflow-hidden ring-line" style="background-color:#e9e1cc">
+          <span class="absolute top-2 left-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130fcc;color:#f3f0ea;">RESOLVE · 6K</span>
+          <span class="absolute bottom-2 right-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130f;color:#f3f0ea;">05:01</span>
+          <div class="absolute inset-x-3 bottom-10 serif text-[24px] leading-none ink">Editorial Doc Pack</div>
+        </div>
+        <div class="flex items-center justify-between mt-2 text-[13px]">
+          <span class="ink2">by North Studios</span>
+          <span class="mono muted">$29</span>
+        </div>
+      </a>
+      <a class="block group" href="#">
+        <div class="aspect-[4/5] rounded-xl stripe relative overflow-hidden ring-line" style="background-color:#e8c7c1">
+          <span class="absolute top-2 left-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130fcc;color:#f3f0ea;">PR · 9:16</span>
+          <span class="absolute bottom-2 right-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130f;color:#f3f0ea;">00:30</span>
+          <div class="absolute inset-x-3 bottom-10 serif text-[24px] leading-none ink">Reels · Caption Engine</div>
+        </div>
+        <div class="flex items-center justify-between mt-2 text-[13px]">
+          <span class="ink2">by Pinecone Post</span>
+          <span class="mono muted">Free</span>
+        </div>
+      </a>
+      <a class="block group" href="#">
+        <div class="aspect-[4/5] rounded-xl stripe relative overflow-hidden ring-line" style="background-color:#c9d3c2">
+          <span class="absolute top-2 left-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#13130fcc;color:#f3f0ea;">AE · 4K</span>
+          <span class="absolute bottom-2 right-2 mono text-[10px] px-1.5 py-0.5 rounded" style="background:#c8ff3d;color:#0f1a00;">01:14</span>
+          <div class="absolute inset-x-3 bottom-10 serif text-[24px] leading-none ink">Brutalist Type / Promo</div>
+        </div>
+        <div class="flex items-center justify-between mt-2 text-[13px]">
+          <span class="ink2">by Wondercraft</span>
+          <span class="mono muted">$16</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <a href="#" class="btn btn-primary">Browse all 30,412 templates
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <span class="mono text-[12px] muted">Every license is commercial-clear. No surprise rugs.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BIG NUMBERS ============== -->
+<section class="bg-ink text-bg relative grain overflow-hidden">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28 relative">
+    <div class="seclabel mb-6" style="color:#9c978a"><span class="dot" style="background:#c8ff3d"></span> 03 — Numbers</div>
+    <h2 class="display t-h2 max-w-[20ch]">A marketplace that <em style="color:#c8ff3d">actually&nbsp;pays</em> creators.</h2>
+
+    <div class="mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+      <div>
+        <div class="big-num text-[72px] md:text-[112px]">82<span style="color:#c8ff3d">k</span></div>
+        <div class="text-[14px]" style="color:#cfc9b8">active editors / month</div>
+      </div>
+      <div>
+        <div class="big-num text-[72px] md:text-[112px]">$14.2<span style="color:#c8ff3d">m</span></div>
+        <div class="text-[14px]" style="color:#cfc9b8">paid to creators in 2025</div>
+      </div>
+      <div>
+        <div class="big-num text-[72px] md:text-[112px]">2,841</div>
+        <div class="text-[14px]" style="color:#cfc9b8">independent template sellers</div>
+      </div>
+      <div>
+        <div class="big-num text-[72px] md:text-[112px]">4.9<span style="color:#c8ff3d">★</span></div>
+        <div class="text-[14px]" style="color:#cfc9b8">G2 — across 1,200 reviews</div>
+      </div>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-3 gap-4">
+      <div class="rounded-2xl p-5" style="background:#1c1c17;border:1px solid #2a2a22;">
+        <div class="mono text-[11px]" style="color:#9c978a">REVENUE SHARE</div>
+        <div class="serif text-[44px] leading-none mt-2">85<span style="color:#c8ff3d">%</span> to creators</div>
+        <div class="text-[14px] mt-2" style="color:#cfc9b8">Industry default is 50. We pay the people who make the work.</div>
+      </div>
+      <div class="rounded-2xl p-5" style="background:#1c1c17;border:1px solid #2a2a22;">
+        <div class="mono text-[11px]" style="color:#9c978a">RENDER QUEUE</div>
+        <div class="serif text-[44px] leading-none mt-2">11<span style="color:#c8ff3d">s</span> avg</div>
+        <div class="text-[14px] mt-2" style="color:#cfc9b8">For a 30s 1080p export. We measured. Then we did it again.</div>
+      </div>
+      <div class="rounded-2xl p-5" style="background:#1c1c17;border:1px solid #2a2a22;">
+        <div class="mono text-[11px]" style="color:#9c978a">LICENSING</div>
+        <div class="serif text-[44px] leading-none mt-2">0 <span style="color:#c8ff3d">strikes</span></div>
+        <div class="text-[14px] mt-2" style="color:#cfc9b8">Music, stock, AI footage — all commercial-clean. We indemnify it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== EXTENSIONS ============== -->
+<section id="extensions" class="border-t line">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-10 md:mb-14">
+      <div class="md:col-span-7">
+        <div class="seclabel mb-5"><span class="dot"></span> 04 — Extensions</div>
+        <h2 class="display t-h2 max-w-[20ch]">Lives <em>inside</em> the editor you already use.</h2>
+      </div>
+      <p class="md:col-span-5 ink2 text-[17px] leading-[1.5]">
+        Reelyard ships as a first-class panel inside DaVinci Resolve and Adobe Premiere Pro.
+        Drop a template onto your timeline without ever leaving your project.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-4 md:gap-6">
+      <!-- Premiere extension -->
+      <div class="editor-shell relative">
+        <div class="editor-chrome">
+          <span class="editor-dot"></span><span class="editor-dot"></span><span class="editor-dot"></span>
+          <span class="mono text-[11px] text-[#a8a294] ml-2">Adobe Premiere Pro — Window › Extensions › Reelyard</span>
+        </div>
+        <div class="p-5 min-h-[320px]">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="mono text-[10px] px-1.5 py-0.5 rounded" style="background:#26261f;color:#c8ff3d;">PREMIERE · PANEL</span>
+            <span class="mono text-[10px] text-[#a8a294]">v4.2.1</span>
+          </div>
+          <div class="text-[#f3f0ea] serif text-[40px] leading-none">Drag · drop · cut.</div>
+          <div class="text-[#a8a294] text-[13px] mt-2 max-w-[40ch]">
+            Reelyard appears as a docked panel. Drag any template directly onto your sequence —
+            essential graphics roll in editable, with all clip handles intact.
+          </div>
+          <div class="mt-6 grid grid-cols-4 gap-2">
+            <div class="aspect-video stripe-dark rounded-md"></div>
+            <div class="aspect-video stripe-dark rounded-md"></div>
+            <div class="aspect-video rounded-md" style="background:#c8ff3d22;border:1px dashed #c8ff3d;"></div>
+            <div class="aspect-video stripe-dark rounded-md"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Resolve extension -->
+      <div class="editor-shell relative">
+        <div class="editor-chrome">
+          <span class="editor-dot"></span><span class="editor-dot"></span><span class="editor-dot"></span>
+          <span class="mono text-[11px] text-[#a8a294] ml-2">DaVinci Resolve 19 — Workspace › Reelyard</span>
+        </div>
+        <div class="p-5 min-h-[320px]">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="mono text-[10px] px-1.5 py-0.5 rounded" style="background:#26261f;color:#c8ff3d;">RESOLVE · WORKSPACE</span>
+            <span class="mono text-[10px] text-[#a8a294]">v2.0</span>
+          </div>
+          <div class="text-[#f3f0ea] serif text-[40px] leading-none">Fusion-native, color-safe.</div>
+          <div class="text-[#a8a294] text-[13px] mt-2 max-w-[40ch]">
+            Templates land as native Fusion comps. LUTs install into the right bin. Your node
+            graph stays your node graph.
+          </div>
+          <div class="mt-6 flex items-center gap-2">
+            <span class="mono text-[10px] px-2 py-1 rounded" style="background:#1c1c17;color:#c8ff3d;border:1px solid #2a2a22;">FUSION</span>
+            <span class="mono text-[10px] px-2 py-1 rounded" style="background:#1c1c17;color:#a8a294;border:1px solid #2a2a22;">DCTL</span>
+            <span class="mono text-[10px] px-2 py-1 rounded" style="background:#1c1c17;color:#a8a294;border:1px solid #2a2a22;">DAVINCI WIDE GAMUT</span>
+            <span class="mono text-[10px] px-2 py-1 rounded" style="background:#1c1c17;color:#a8a294;border:1px solid #2a2a22;">CACHE-AWARE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CREATOR TESTIMONIALS ============== -->
+<section id="creators" class="bg-bg2 border-t line">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-10 md:mb-14">
+      <div class="md:col-span-7">
+        <div class="seclabel mb-5"><span class="dot"></span> 05 — Creators</div>
+        <h2 class="display t-h2 max-w-[20ch]">The ones who <em>actually</em> ship every week.</h2>
+      </div>
+      <p class="md:col-span-5 ink2 text-[17px] leading-[1.5]">
+        We didn’t cherry-pick. These are creators paying themselves with Reelyard — the
+        kind whose timelines never have an empty Tuesday.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+      <figure class="rounded-2xl p-6 bg-bg ring-line">
+        <blockquote class="serif text-[26px] leading-[1.15] ink">
+          “I cut a 90-second client spot end-to-end on a flight. Veo for the b-roll I forgot
+          to shoot, a template for the lower-thirds, render done before I deplaned.”
+        </blockquote>
+        <figcaption class="mt-6 flex items-center gap-3">
+          <span class="avatar">NO</span>
+          <span class="text-[14px]">
+            <span class="font-semibold">Nima Okafor</span><br/>
+            <span class="muted">Director · 248k YouTube subs</span>
+          </span>
+        </figcaption>
+      </figure>
+      <figure class="rounded-2xl p-6 bg-bg ring-line">
+        <blockquote class="serif text-[26px] leading-[1.15] ink">
+          “We replaced three subscriptions with one Reelyard Studio seat per editor.
+          Renders are faster than our old local farm. I’m not kidding.”
+        </blockquote>
+        <figcaption class="mt-6 flex items-center gap-3">
+          <span class="avatar">MS</span>
+          <span class="text-[14px]">
+            <span class="font-semibold">Mira Soto</span><br/>
+            <span class="muted">Head of post · Pool House</span>
+          </span>
+        </figcaption>
+      </figure>
+      <figure class="rounded-2xl p-6 bg-ink text-bg">
+        <blockquote class="serif text-[26px] leading-[1.15]">
+          “Sold $41,300 of templates in my first six months. The dashboard is honestly
+          the only creator-economy product I trust the math of.”
+        </blockquote>
+        <figcaption class="mt-6 flex items-center gap-3">
+          <span class="avatar" style="background:#3a382f;color:#f3f0ea;">OP</span>
+          <span class="text-[14px]">
+            <span class="font-semibold">Olu &amp; Park</span><br/>
+            <span style="color:#9c978a;">Top-100 seller, 2025</span>
+          </span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PRICING ============== -->
+<section id="pricing" class="border-t line">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-10 md:mb-14">
+      <div class="md:col-span-7">
+        <div class="seclabel mb-5"><span class="dot"></span> 06 — Pricing</div>
+        <h2 class="display t-h2 max-w-[20ch]">Pricing that <em>scales with what you ship</em>, not seats.</h2>
+      </div>
+      <div class="md:col-span-5 flex md:justify-end">
+        <div class="inline-flex p-1 rounded-full pill mono text-[12px]">
+          <button class="px-3 py-1.5 rounded-full" style="background:#13130f;color:#f3f0ea;">Monthly</button>
+          <button class="px-3 py-1.5 rounded-full ink2">Yearly — save 22%</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4 md:gap-5">
+      <article class="price-card rounded-2xl p-6 bg-bg2 ring-line">
+        <div class="flex items-center justify-between mb-6">
+          <div class="serif text-[28px] leading-none">Starter</div>
+          <span class="mono text-[11px] muted">solo</span>
+        </div>
+        <div class="big-num text-[64px]">Free</div>
+        <div class="text-[13px] muted">forever — no card</div>
+        <ul class="mt-6 space-y-2.5 text-[14px] ink2">
+          <li class="flex gap-2"><span class="mono muted text-xs mt-1">✓</span> 50 free templates / month</li>
+          <li class="flex gap-2"><span class="mono muted text-xs mt-1">✓</span> 200 AI credits / month</li>
+          <li class="flex gap-2"><span class="mono muted text-xs mt-1">✓</span> 720p cloud render</li>
+          <li class="flex gap-2"><span class="mono muted text-xs mt-1">✓</span> Resolve &amp; Premiere extensions</li>
+        </ul>
+        <a href="#" class="mt-8 btn btn-ghost w-full justify-center">Start free</a>
+      </article>
+
+      <article class="price-card featured rounded-2xl p-6 ring-line relative">
+        <span class="absolute -top-3 left-6 tape mono text-[11px] font-semibold">MOST CREATORS</span>
+        <div class="flex items-center justify-between mb-6">
+          <div class="serif text-[28px] leading-none">Studio</div>
+          <span class="mono text-[11px]" style="color:#9c978a">solo · pro</span>
+        </div>
+        <div class="big-num text-[64px]">$24<span style="font-size:24px;color:#9c978a;">/mo</span></div>
+        <div class="text-[13px]" style="color:#9c978a">billed monthly · cancel anytime</div>
+        <ul class="mt-6 space-y-2.5 text-[14px]" style="color:#e8e2d2">
+          <li class="flex gap-2"><span class="mono text-xs mt-1" style="color:#c8ff3d">✓</span> Unlimited template downloads</li>
+          <li class="flex gap-2"><span class="mono text-xs mt-1" style="color:#c8ff3d">✓</span> 4,000 AI credits / month</li>
+          <li class="flex gap-2"><span class="mono text-xs mt-1" style="color:#c8ff3d">✓</span> 4K cloud render, 11s avg</li>
+          <li class="flex gap-2"><span class="mono text-xs mt-1" style="color:#c8ff3d">✓</span> Commercial license included</li>
+          <li class="flex gap-2"><span class="mono text-xs mt-1" style="color:#c8ff3d">✓</span> Priority support, real humans</li>
+        </ul>
+        <a href="#join" class="mt-8 btn btn-accent w-full justify-center">Start 14-day trial</a>
+      </article>
+
+      <article class="price-card rounded-2xl p-6 bg-bg2 ring-line">
+        <div class="flex items-center justify-between mb-6">
+          <div class="serif text-[28px] leading-none">Studio Team</div>
+          <span class="mono text-[11px] muted">2 — 25 seats</span>
+        </div>
+        <div class="big-num text-[64px]">$18<span style="font-size:24px;color:var(--muted);">/seat</span></div>
+        <div class="text-[13px] muted">flat — no per-render fees</div>
+        <ul class="mt-6 space-y-2.5 text-[14px] ink2">
+          <li class="flex gap-2"><span class="mono muted text-xs mt-1">✓</span> Everything in Studio</li>
+          <li class="flex gap-2"><span class="mono muted text-xs mt-1">✓</span> Shared brand kits &amp; LUT libraries</li>
+          <li class="flex gap-2"><span class="mono muted text-xs mt-1">✓</span> SSO, audit log, SOC 2</li>
+          <li class="flex gap-2"><span class="mono muted text-xs mt-1">✓</span> Pooled credits, no waste</li>
+        </ul>
+        <a href="#" class="mt-8 btn btn-ghost w-full justify-center">Talk to us</a>
+      </article>
+    </div>
+
+    <p class="mt-8 foot">Prices in USD. Sellers always keep 85% of template revenue, regardless of plan.</p>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="border-t line bg-bg2">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="grid md:grid-cols-12 gap-6 md:gap-10">
+      <div class="md:col-span-4">
+        <div class="seclabel mb-5"><span class="dot"></span> 07 — FAQ</div>
+        <h2 class="display t-h3 max-w-[14ch]">Things people <em>actually</em> ask.</h2>
+        <p class="ink2 mt-5 text-[15px] max-w-[36ch]">Anything missing? Email <a class="ulink" href="/cdn-cgi/l/email-protection#224a4b625047474e5b4350460c414d"><span class="__cf_email__" data-cfemail="7f17163f0d1a1a13061e0d1b511c10">[email&#160;protected]</span></a> — a real editor on our team answers within a day.</p>
+      </div>
+      <div class="md:col-span-8 divide-y line border-y line">
+        <details class="py-5 group" open>
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="serif text-[24px] md:text-[28px] leading-none">Is the AI footage commercially usable?</span>
+            <span class="mono text-[11px] muted group-open:rotate-45 transition">+</span>
+          </summary>
+          <p class="mt-3 ink2 text-[15px] max-w-[68ch]">Yes — every generation through Reelyard is wrapped in a commercial license, indemnified
+            up to $50k per project on Studio plans. We only ship models whose providers allow this.</p>
+        </details>
+        <details class="py-5 group">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="serif text-[24px] md:text-[28px] leading-none">Will my Premiere project break if I uninstall?</span>
+            <span class="mono text-[11px] muted group-open:rotate-45 transition">+</span>
+          </summary>
+          <p class="mt-3 ink2 text-[15px] max-w-[68ch]">No. Anything Reelyard places in your timeline becomes a regular, editable asset on disk.
+            The panel is just a vending machine; what you cut is yours.</p>
+        </details>
+        <details class="py-5 group">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="serif text-[24px] md:text-[28px] leading-none">How do payouts work for sellers?</span>
+            <span class="mono text-[11px] muted group-open:rotate-45 transition">+</span>
+          </summary>
+          <p class="mt-3 ink2 text-[15px] max-w-[68ch]">Weekly via Stripe in 47 countries. You see every sale, refund, and country breakdown.
+            We take 15% net of payment fees — no hidden &ldquo;feature&rdquo; surcharges.</p>
+        </details>
+        <details class="py-5 group">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="serif text-[24px] md:text-[28px] leading-none">Can I use Reelyard on iPad / mobile?</span>
+            <span class="mono text-[11px] muted group-open:rotate-45 transition">+</span>
+          </summary>
+          <p class="mt-3 ink2 text-[15px] max-w-[68ch]">The marketplace and AI tools are fully responsive — you can prompt, preview and
+            queue renders from your phone. Editing extensions are desktop-only (Premiere, Resolve).</p>
+        </details>
+        <details class="py-5 group">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="serif text-[24px] md:text-[28px] leading-none">Do credits roll over?</span>
+            <span class="mono text-[11px] muted group-open:rotate-45 transition">+</span>
+          </summary>
+          <p class="mt-3 ink2 text-[15px] max-w-[68ch]">On Studio and Studio Team, yes — up to 2× your monthly allowance. Starter credits reset each month.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ABOUT THE DESIGNER ============== -->
+<section class="border-t line bg-bg2">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="grid md:grid-cols-12 gap-6 md:gap-10">
+      <div class="md:col-span-5">
+        <div class="seclabel mb-5"><span class="dot"></span> Designer & Developer</div>
+        <h2 class="display t-h3 max-w-[16ch]">Built by <em>Austin Opia</em></h2>
+        <p class="ink2 mt-5 text-[15px] max-w-[40ch]">
+          Senior Laravel Developer & Design-Focused Front-End Engineer with 8+ years building scalable applications. 
+          I design directly in Tailwind CSS — no Figma, just pure implementation.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="https://github.com/thomsontochi" target="_blank" class="btn btn-ghost text-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            github.com/thomsontochi
+          </a>
+          <a href="https://austinopia.aidevelopia.com" target="_blank" class="btn btn-primary text-sm">
+            View Portfolio
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="md:col-span-7">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="rounded-2xl p-5 bg-bg ring-line">
+            <div class="mono text-[11px] muted mb-2">TECH STACK</div>
+            <div class="text-[15px] ink2 font-semibold mb-2">Perfect Alignment</div>
+            <p class="text-[13px] ink2">Laravel 10-12, Vue 3, React, TypeScript, Inertia.js, Tailwind CSS, PostgreSQL, AWS — matches your stack exactly.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-bg ring-line">
+            <div class="mono text-[11px] muted mb-2">AI/LLM</div>
+            <div class="text-[15px] ink2 font-semibold mb-2">Deep Integration Experience</div>
+            <p class="text-[13px] ink2">OpenAI, Anthropic, Gemini, ScaleSERP integrations — ready to build UIs for Veo, Nano Banana, KlingAI.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-bg ring-line">
+            <div class="mono text-[11px] muted mb-2">DESIGN APPROACH</div>
+            <div class="text-[15px] ink2 font-semibold mb-2">Tailwind-First</div>
+            <p class="text-[13px] ink2">I skip Figma and design directly in Tailwind CSS & HTML — faster iteration, pixel-perfect implementation.</p>
+          </div>
+          <div class="rounded-2xl p-5 bg-bg ring-line">
+            <div class="mono text-[11px] muted mb-2">MOBILE & EXTENSIONS</div>
+            <div class="text-[15px] ink2 font-semibold mb-2">Full-Stack Ready</div>
+            <p class="text-[13px] ink2">Mobile-responsive design expertise. React + Tailwind experience for DaVinci Resolve & Premiere extensions.</p>
+          </div>
+        </div>
+        <div class="mt-6 rounded-2xl p-5" style="background:#1c1c17;border:1px solid #2a2a22;">
+          <div class="mono text-[11px]" style="color:#9c978a">REMOTE & EXPERIENCE</div>
+          <div class="text-[#f3f0ea] text-[15px] mt-2 font-semibold">8+ Years · Lagos, Nigeria (Remote)</div>
+          <p class="text-[13px] mt-2" style="color:#cfc9b8">Building high-performance web applications with focus on intuitive UI/UX. Ready to lead design and front-end development for ContentCreator.com's AI tools marketplace.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FINAL CTA ============== -->
+<section id="join" class="bg-ink text-bg relative overflow-hidden">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-24 md:py-36 relative">
+    <div class="grid md:grid-cols-12 gap-6 md:gap-10 items-end">
+      <div class="md:col-span-8">
+        <div class="seclabel mb-5" style="color:#9c978a"><span class="dot" style="background:#c8ff3d"></span> Last thing</div>
+        <h2 class="display t-display max-w-[14ch]">
+          Open Reelyard.<br/><em style="color:#c8ff3d">Cut something today.</em>
+        </h2>
+      </div>
+      <div class="md:col-span-4 flex md:justify-end">
+        <div class="rounded-2xl p-5" style="background:#1c1c17;border:1px solid #2a2a22;min-width:280px;">
+          <div class="mono text-[11px]" style="color:#9c978a">START FREE</div>
+          <form class="mt-3 space-y-2.5" onsubmit="event.preventDefault()">
+            <input type="email" placeholder="you@studio.com" class="w-full bg-transparent text-[15px] px-3 py-2.5 rounded-md outline-none"
+                   style="border:1px solid #2a2a22;color:#f3f0ea;"/>
+            <button class="w-full btn btn-accent justify-center">Create my account
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="mono text-[10px]" style="color:#9c978a">No card · 14-day Studio trial · Cancel in one click</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="border-t line">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-12">
+    <div class="grid md:grid-cols-12 gap-8">
+      <div class="md:col-span-4">
+        <a href="#" class="flex items-center gap-2">
+          <span class="inline-block w-6 h-6 bg-ink relative"><span class="absolute right-0 top-0 w-3 t-h3 accent"></span></span>
+          <span class="font-semibold tracking-tight text-[15px]">Reelyard</span>
+        </a>
+        <p class="ink2 text-[14px] mt-4 max-w-[36ch]">A marketplace, AI toolkit, and editor extensions for video creators who actually ship. Designed by Austin Opia.</p>
+        <p class="mono text-[11px] muted mt-6">© 2026 Reelyard Labs · Made in Lisbon &amp; Brooklyn · Designed by Austin Opia</p>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a href="https://github.com/thomsontochi" target="_blank" class="text-[13px] ink2 hover:ink flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://austinopia.aidevelopia.com" target="_blank" class="text-[13px] ink2 hover:ink flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Portfolio
+          </a>
+        </div>
+      </div>
+      <div class="md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-4 text-[14px]">
+        <div>
+          <div class="mono text-[11px] muted mb-3">PRODUCT</div>
+          <ul class="space-y-2 ink2">
+            <li><a href="#marketplace" class="ulink">Marketplace</a></li>
+            <li><a href="#ai" class="ulink">AI tools</a></li>
+            <li><a href="#extensions" class="ulink">Extensions</a></li>
+            <li><a href="#pricing" class="ulink">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="mono text-[11px] muted mb-3">SELLERS</div>
+          <ul class="space-y-2 ink2">
+            <li><a class="ulink" href="#">Start selling</a></li>
+            <li><a class="ulink" href="#">Payouts</a></li>
+            <li><a class="ulink" href="#">License terms</a></li>
+            <li><a class="ulink" href="#">Top creators</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="mono text-[11px] muted mb-3">COMPANY</div>
+          <ul class="space-y-2 ink2">
+            <li><a class="ulink" href="#">About</a></li>
+            <li><a class="ulink" href="#">Hiring · 4</a></li>
+            <li><a class="ulink" href="#">Changelog</a></li>
+            <li><a class="ulink" href="#">Press kit</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="mono text-[11px] muted mb-3">LEGAL</div>
+          <ul class="space-y-2 ink2">
+            <li><a class="ulink" href="#">Terms</a></li>
+            <li><a class="ulink" href="#">Privacy</a></li>
+            <li><a class="ulink" href="#">DMCA</a></li>
+            <li><a class="ulink" href="#">Status</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Smooth-scroll for in-page anchors
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href').slice(1);
+      const el = id && document.getElementById(id);
+      if(el){ e.preventDefault(); window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 72, behavior:'smooth'}); }
+    });
+  });
+</script>
+</body>
+</html>
